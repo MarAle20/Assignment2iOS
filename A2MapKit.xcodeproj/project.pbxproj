@@ -11,6 +11,7 @@
 		CE492DB62AEC1ECC00504847 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE492DB52AEC1ECC00504847 /* ContentView.swift */; };
 		CE492DB82AEC1ECF00504847 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE492DB72AEC1ECF00504847 /* Assets.xcassets */; };
 		CE492DBB2AEC1ECF00504847 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE492DBA2AEC1ECF00504847 /* Preview Assets.xcassets */; };
+		CE492DC32AEC25E800504847 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE492DC22AEC25E800504847 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		CE492DB52AEC1ECC00504847 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE492DB72AEC1ECF00504847 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE492DBA2AEC1ECF00504847 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CE492DC22AEC25E800504847 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE492DC32AEC25E800504847 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +40,7 @@
 			children = (
 				CE492DB22AEC1ECC00504847 /* A2MapKit */,
 				CE492DB12AEC1ECC00504847 /* Products */,
+				CE492DC12AEC25E800504847 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +69,14 @@
 				CE492DBA2AEC1ECF00504847 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CE492DC12AEC25E800504847 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE492DC22AEC25E800504847 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

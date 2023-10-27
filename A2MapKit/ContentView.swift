@@ -6,14 +6,31 @@
 //
 
 import SwiftUI
+import MapKit
+
+struct Location: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+}
+
+struct RouteSteps : Identifiable {
+    let id = UUID()
+    let step : String
+    
+}
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            //Map kit map
+            
+            //Form with textfields
+            
+            //Picker
+            
+            //List1234
+            
         }
         .padding()
     }
