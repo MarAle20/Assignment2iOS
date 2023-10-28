@@ -24,6 +24,8 @@ struct RouteSteps : Identifiable {
 
 struct MapView: View {
     
+    @State private var formIsExpanded = true
+    
     @StateObject private var viewModel = ContentViewModel()
     
     @State private var userLocation: MapUserTrackingMode = .follow
@@ -41,6 +43,9 @@ struct MapView: View {
     @State private var annotations2: [Location] = []
     @State private var annotations3: [Location] = []
     
+    @State var RSStartToStop1: [RouteSteps] = []
+    @State var RSStop1ToStop2: [RouteSteps] = [RouteSteps(step: "stop 1 to stop2 to here follow this step")]
+    @State var RSStop2ToFinalStop: [RouteSteps] = []
     
     var body: some View {
         
@@ -54,31 +59,60 @@ struct MapView: View {
                     viewModel.checkIfLocationServiceIsEnabled()
                 }
             
-            VStack {
-                Form{
-                    Section(header: Text("Destinations")){
-                        
-                        TextField("First Stop", text: $firstStopText, onCommit: {
-                            searchLocationAndAddPin(location: firstStopText, stopNumber: "1")
-                        })
-                        
-                        TextField("Second Stop", text: $secondStopText, onCommit: {
-                                searchLocationAndAddPin(location: secondStopText, stopNumber: "2")
-                        })
-                        
-                        TextField("Final Destination", text: $finalDestinationText, onCommit: {
-                            searchLocationAndAddPin(location: finalDestinationText, stopNumber: "3")
-                        })
+            DisclosureGroup(isExpanded: $formIsExpanded,content: {
+                
+                Section(header: Text("Destinations")){
+                    
+                    TextField("First Stop", text: $firstStopText, onCommit: {
+                        searchLocationAndAddPin(location: firstStopText, stopNumber: "1")
+                    })
+                    
+                    TextField("Second Stop", text: $secondStopText, onCommit: {
+                        searchLocationAndAddPin(location: secondStopText, stopNumber: "2")
+                    })
+                    
+                    TextField("Final Destination", text: $finalDestinationText, onCommit: {
+                        searchLocationAndAddPin(location: finalDestinationText, stopNumber: "3")
+                    })
+                }.padding(10)
+                
+                Section(header: Text("Navigation Type")) {
+                    Picker("", selection: $selectedNavigation){
+                        ForEach(0..<navigationOptions.count, id: \.self){
+                            Text(self.navigationOptions[$0])
+                        }
+                    }.pickerStyle(MenuPickerStyle())
+                }.padding(10)
+                
+            }, label: {Text("Navigation Form")})
+                
+
+            List{
+                if !RSStartToStop1.isEmpty {
+                    Section(header: Text("Start to Stop 1")){
+                        ForEach(RSStartToStop1) { item in
+                            Text(item.step)
+                        }
                     }
-                    Section(header: Text("Navigation Type")) {
-                        Picker("", selection: $selectedNavigation){
-                            ForEach(0..<navigationOptions.count, id: \.self){
-                                Text(self.navigationOptions[$0])
-                            }
-                        }.pickerStyle(MenuPickerStyle())
+                }
+
+                if !RSStop1ToStop2.isEmpty {
+                    Section(header: Text("Stop 1 to Stop 2")){
+                        ForEach(RSStop1ToStop2) { item in
+                            Text(item.step)
+                        }
+                    }
+                }
+
+                if !RSStop2ToFinalStop.isEmpty {
+                    Section(header: Text("Stop 2 to Final Destination")){
+                        ForEach(RSStop2ToFinalStop) { item in
+                            Text(item.step)
+                        }
                     }
                 }
             }
+            .listStyle(GroupedListStyle())
         }
     }
     
