@@ -28,8 +28,6 @@ struct MapView: View {
     
     @StateObject private var viewModel = ContentViewModel()
     
-    @State private var userLocation: MapUserTrackingMode = .follow
-    
     //User Input
     @State private var firstStopText: String = ""
     @State private var secondStopText: String = ""
@@ -44,7 +42,7 @@ struct MapView: View {
     @State private var annotations3: [Location] = []
     
     @State var RSStartToStop1: [RouteSteps] = []
-    @State var RSStop1ToStop2: [RouteSteps] = [RouteSteps(step: "stop 1 to stop2 to here follow this step")]
+    @State var RSStop1ToStop2: [RouteSteps] = []
     @State var RSStop2ToFinalStop: [RouteSteps] = []
     
     var body: some View {
@@ -84,6 +82,10 @@ struct MapView: View {
                     }.pickerStyle(MenuPickerStyle())
                 }.padding(10)
                 
+                Button(action: {
+                    self.calculateRoute()
+                }){Text("Begin Navigation")}
+                
             }, label: {Text("Navigation Form")})
                 
 
@@ -114,6 +116,87 @@ struct MapView: View {
             }
             .listStyle(GroupedListStyle())
         }
+    }
+    
+    func calculateRoute(){
+        
+        let navigationType = selectedNavigation
+        
+        //Clean all route steps from all 3 routeLists
+        RSStartToStop1.removeAll()
+        RSStop1ToStop2.removeAll()
+        RSStop2ToFinalStop.removeAll()
+        
+        var defaultCoordinates = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        let request = MKDirections.Request()
+        
+        if (navigationType == 0 || navigationType == 1){
+            //Calculate start to stop1
+            request.source = MKMapItem(placemark: MKPlacemark(coordinate: viewModel.userLocation ,  addressDictionary: nil))
+            
+            request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotations1.first?.coordinate ?? defaultCoordinates, addressDictionary: nil))
+            
+            request.requestsAlternateRoutes = false
+            request.transportType = .automobile
+            
+            let directions = MKDirections(request: request)
+            directions.calculate (completionHandler: { response, error in
+                
+                for route in (response?.routes)! {
+                    
+                    self.RSStartToStop1 = []
+                    for step in route.steps {
+                        self.RSStartToStop1.append(RouteSteps(step: step.instructions))
+                    }
+                }
+            })        }
+        
+        if(navigationType == 0 || navigationType == 2){
+            //Calculate stop1 to stop2
+            request.source = MKMapItem(placemark: MKPlacemark(coordinate:
+                                                                annotations1.first?.coordinate ?? defaultCoordinates,  addressDictionary: nil))
+            
+            request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotations2.first?.coordinate ?? defaultCoordinates, addressDictionary: nil))
+            
+            request.requestsAlternateRoutes = false
+            request.transportType = .automobile
+            
+            let directions = MKDirections(request: request)
+            directions.calculate (completionHandler: { response, error in
+                
+                for route in (response?.routes)! {
+                    
+                    self.RSStop1ToStop2 = []
+                    for step in route.steps {
+                        self.RSStop1ToStop2.append(RouteSteps(step: step.instructions))
+                    }
+                }
+            })
+        }
+        
+        if(navigationType == 0){
+            //Calculate step 2 to final destination
+            request.source = MKMapItem(placemark: MKPlacemark(coordinate:
+                                                                annotations2.first?.coordinate ?? defaultCoordinates,  addressDictionary: nil))
+            
+            request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotations3.first?.coordinate ?? defaultCoordinates, addressDictionary: nil))
+            
+            request.requestsAlternateRoutes = false
+            request.transportType = .automobile
+            
+            let directions = MKDirections(request: request)
+            directions.calculate (completionHandler: { response, error in
+                
+                for route in (response?.routes)! {
+                    
+                    self.RSStop2ToFinalStop = []
+                    for step in route.steps {
+                        self.RSStop2ToFinalStop.append(RouteSteps(step: step.instructions))
+                    }
+                }
+            })
+        }
+    
     }
     
     private func searchLocationAndAddPin(location: String, stopNumber: String){
@@ -152,6 +235,8 @@ final class ContentViewModel : NSObject, ObservableObject, CLLocationManagerDele
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
+    @Published var userLocation = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    
     var locationManager: CLLocationManager?
     
     func checkIfLocationServiceIsEnabled(){
@@ -175,6 +260,9 @@ final class ContentViewModel : NSObject, ObservableObject, CLLocationManagerDele
         case .denied:
             print("You are denied")
         case .authorizedAlways, .authorizedWhenInUse:
+            
+            userLocation = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+            
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span:MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
             break
         @unknown default:
