@@ -12,6 +12,8 @@
 		CE492DB82AEC1ECF00504847 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE492DB72AEC1ECF00504847 /* Assets.xcassets */; };
 		CE492DBB2AEC1ECF00504847 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE492DBA2AEC1ECF00504847 /* Preview Assets.xcassets */; };
 		CE492DC32AEC25E800504847 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE492DC22AEC25E800504847 /* MapKit.framework */; };
+		CE492DC52AEC57D900504847 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE492DC42AEC57D800504847 /* CoreLocation.framework */; };
+		CE492DC72AEC583B00504847 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE492DC62AEC583B00504847 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		CE492DB72AEC1ECF00504847 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE492DBA2AEC1ECF00504847 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CE492DC22AEC25E800504847 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CE492DC42AEC57D800504847 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CE492DC62AEC583B00504847 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE492DC52AEC57D900504847 /* CoreLocation.framework in Frameworks */,
 				CE492DC32AEC25E800504847 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +64,7 @@
 				CE492DB52AEC1ECC00504847 /* ContentView.swift */,
 				CE492DB72AEC1ECF00504847 /* Assets.xcassets */,
 				CE492DB92AEC1ECF00504847 /* Preview Content */,
+				CE492DC62AEC583B00504847 /* MapView.swift */,
 			);
 			path = A2MapKit;
 			sourceTree = "<group>";
@@ -74,6 +80,7 @@
 		CE492DC12AEC25E800504847 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE492DC42AEC57D800504847 /* CoreLocation.framework */,
 				CE492DC22AEC25E800504847 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -150,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE492DB62AEC1ECC00504847 /* ContentView.swift in Sources */,
+				CE492DC72AEC583B00504847 /* MapView.swift in Sources */,
 				CE492DB42AEC1ECC00504847 /* A2MapKitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +289,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"A2MapKit/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to use the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -309,6 +318,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"A2MapKit/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires your location to use the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
