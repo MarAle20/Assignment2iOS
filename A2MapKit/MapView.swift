@@ -52,14 +52,13 @@ struct MapView: View {
             Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: annotations1 + annotations2 + annotations3){ item in
                 MapMarker(coordinate: item.coordinate)
             }
-                .ignoresSafeArea()
                 .onAppear{
                     viewModel.checkIfLocationServiceIsEnabled()
                 }
             
             DisclosureGroup(isExpanded: $formIsExpanded,content: {
                 
-                Section(header: Text("Destinations")){
+                Section(header: Text("Insert Destinations")){
                     
                     TextField("First Stop", text: $firstStopText, onCommit: {
                         searchLocationAndAddPin(location: firstStopText, stopNumber: "1")
@@ -74,7 +73,7 @@ struct MapView: View {
                     })
                 }.padding(10)
                 
-                Section(header: Text("Navigation Type")) {
+                Section(header: Text("Select Navigation Type")) {
                     Picker("", selection: $selectedNavigation){
                         ForEach(0..<navigationOptions.count, id: \.self){
                             Text(self.navigationOptions[$0])
@@ -82,8 +81,9 @@ struct MapView: View {
                     }.pickerStyle(MenuPickerStyle())
                 }.padding(10)
                 
-                Button(action: {
-                    self.calculateRoute()
+                Button(action: {                    
+                    calculateRoute()
+                    formIsExpanded = false
                 }){Text("Begin Navigation")}
                 
             }, label: {Text("Navigation Form")})
@@ -115,7 +115,7 @@ struct MapView: View {
                 }
             }
             .listStyle(GroupedListStyle())
-        }
+        }.padding()
     }
     
     func calculateRoute(){
@@ -201,6 +201,9 @@ struct MapView: View {
     
     private func searchLocationAndAddPin(location: String, stopNumber: String){
     
+        print("Location")
+        print(location)
+        
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(location){(placemarks, error) in
             if let error = error {

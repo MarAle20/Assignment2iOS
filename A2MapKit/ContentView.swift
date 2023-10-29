@@ -12,20 +12,42 @@ import MapKit
 
 struct ContentView: View {
     
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-    
-    
-    @State private var userLocation: MapUserTrackingMode = .follow
-    
     var body: some View {
-        NavigationStack {
-            Text("Map Navigation in SwiftUI")
-                .padding(50)
-            NavigationLink(destination: MapView()){
-                Text("Go to Map Navigation")
-            }.padding(50)
+        NavigationView {
+            
+            ZStack{
+               
+                Color.green.edgesIgnoringSafeArea(.all)
+                
+                VStack{
+                    
+                    Text("A2 Mapkit Navigation App")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(10)
+                    
+                    Text("Made By: Marian Alejandro Heredia")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(10)
+                    
+                    
+                    
+                    NavigationLink(destination: MapView()){
+                        Text("Go to Map Navigation")
+                            .padding()
+                            .background(Color.green.border(Color.white,width: 3))
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .cornerRadius(5)
+                    }.padding()
+                }
+            }
+            
+            
         }
-        .padding()
+    
     }
 }
 
