@@ -84,7 +84,13 @@ struct MapView: View {
                 Button(action: {                    
                     calculateRoute()
                     formIsExpanded = false
-                }){Text("Begin Navigation")}
+                }){Text("Begin Navigation")}.padding(10)
+                
+                Button(action: {
+                    saveStopsOnDatabase()
+                }){
+                    Text("Save Stops and Destinations")
+                }
                 
             }, label: {Text("Navigation Form")})
                 
@@ -117,6 +123,40 @@ struct MapView: View {
             .listStyle(GroupedListStyle())
         }.padding()
     }
+    
+    
+    func saveStopsOnDatabase(){
+        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+
+        let url = URL(string: "http://alejanma.dev.fast.sheridanc.on.ca/iosa3/insertRow.php")!
+        
+        let coordinateString = "\(location.latitude),\(location.longitude)"
+        let type = 2 // Assuming type is an integer
+                
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        // Construct the body as form-data
+        var bodyComponents = URLComponents()
+        bodyComponents.queryItems = [
+            URLQueryItem(name: "coordinate", value: coordinateString),
+            URLQueryItem(name: "type", value: "\(type)")
+        ]
+        
+        request.httpBody = bodyComponents.query?.data(using: .utf8)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // Handle the response here
+            if let error = error {
+                print("Error: \(error)")
+            } else if let data = data {
+                let responseString = String(data: data, encoding: .utf8)
+                print("Response: \(responseString ?? "")")
+            }
+        }.resume()
+                
+    }
+
     
     func calculateRoute(){
         

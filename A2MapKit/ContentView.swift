@@ -32,8 +32,6 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .padding(10)
                     
-                    
-                    
                     NavigationLink(destination: MapView()){
                         Text("Go to Map Navigation")
                             .padding()
@@ -42,6 +40,17 @@ struct ContentView: View {
                             .font(.headline)
                             .cornerRadius(5)
                     }.padding()
+                    
+                    NavigationLink(destination: dbStopsMapView()){
+                        Text("Stops and Destinations from DB")
+                            .padding()
+                            .background(Color.green.border(Color.white,width: 3))
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .cornerRadius(5)
+                    }.padding()
+                    
+                    
                 }
             }
             
