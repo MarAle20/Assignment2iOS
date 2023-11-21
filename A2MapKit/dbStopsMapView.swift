@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct dbStopsMapView: View {
+    @ObservedObject var fetch = GetData()
+    
     var body: some View {
         VStack{
             //Ttitle

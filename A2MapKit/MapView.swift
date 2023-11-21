@@ -87,7 +87,13 @@ struct MapView: View {
                 }){Text("Begin Navigation")}.padding(10)
                 
                 Button(action: {
-                    saveStopsOnDatabase()
+                    let defaultCoordinates = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+                    // Stop1
+                    saveStopsOnDatabase(loc: annotations1.first?.coordinate ?? defaultCoordinates , t: 1)
+                    // Stop2
+                    saveStopsOnDatabase(loc: annotations2.first?.coordinate ?? defaultCoordinates, t: 2)
+                    //Destination
+                    saveStopsOnDatabase(loc: annotations3.first?.coordinate ?? defaultCoordinates, t: 3)
                 }){
                     Text("Save Stops and Destinations")
                 }
@@ -125,13 +131,13 @@ struct MapView: View {
     }
     
     
-    func saveStopsOnDatabase(){
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+    func saveStopsOnDatabase(loc: CLLocationCoordinate2D, t: Int){
+        let location: CLLocationCoordinate2D = loc
 
         let url = URL(string: "http://alejanma.dev.fast.sheridanc.on.ca/iosa3/insertRow.php")!
         
         let coordinateString = "\(location.latitude),\(location.longitude)"
-        let type = 2 // Assuming type is an integer
+        let type = t
                 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

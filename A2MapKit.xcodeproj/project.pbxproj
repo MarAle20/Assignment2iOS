@@ -15,6 +15,7 @@
 		CE492DC52AEC57D900504847 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE492DC42AEC57D800504847 /* CoreLocation.framework */; };
 		CE492DC72AEC583B00504847 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE492DC62AEC583B00504847 /* MapView.swift */; };
 		CE4BB1352B0D075600FD5296 /* dbStopsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BB1342B0D075600FD5296 /* dbStopsMapView.swift */; };
+		CE4BB1382B0D1EE300FD5296 /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BB1372B0D1EE300FD5296 /* GetData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CE492DC62AEC583B00504847 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CE4BB1342B0D075600FD5296 /* dbStopsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbStopsMapView.swift; sourceTree = "<group>"; };
 		CE4BB1362B0D09B200FD5296 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE4BB1372B0D1EE300FD5296 /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				CE492DB92AEC1ECF00504847 /* Preview Content */,
 				CE492DC62AEC583B00504847 /* MapView.swift */,
 				CE4BB1342B0D075600FD5296 /* dbStopsMapView.swift */,
+				CE4BB1372B0D1EE300FD5296 /* GetData.swift */,
 			);
 			path = A2MapKit;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				CE492DB62AEC1ECC00504847 /* ContentView.swift in Sources */,
 				CE492DC72AEC583B00504847 /* MapView.swift in Sources */,
+				CE4BB1382B0D1EE300FD5296 /* GetData.swift in Sources */,
 				CE492DB42AEC1ECC00504847 /* A2MapKitApp.swift in Sources */,
 				CE4BB1352B0D075600FD5296 /* dbStopsMapView.swift in Sources */,
 			);
