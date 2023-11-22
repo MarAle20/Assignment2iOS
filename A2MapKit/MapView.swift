@@ -282,7 +282,7 @@ struct MapView: View {
 //HAD TO SEARCH ALL THIS TO BE ABLE TO ASK USER FOR LOCATION
 final class ContentViewModel : NSObject, ObservableObject, CLLocationManagerDelegate{
     
-    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     
     @Published var userLocation = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
