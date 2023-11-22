@@ -31,6 +31,8 @@ class GetData: ObservableObject {
     @Published var annotations2 = [PinLoc]()
     @Published var annotations3 = [PinLoc]()
     
+    
+    
     init() {
         let url = URL(string: "http://alejanma.dev.fast.sheridanc.on.ca/iosa3/retriveList.php")!
         
