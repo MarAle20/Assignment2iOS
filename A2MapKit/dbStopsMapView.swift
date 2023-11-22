@@ -13,11 +13,9 @@ import MapKit
 
 
 struct dbStopsMapView: View {
-    @State var fetch = GetData()
+    @ObservedObject var fetch = GetData()
     
     let defaultCoordinates = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    
-    @StateObject private var viewModel = ContentViewModel()
     
     @State private var selectedOption = 3
     let options = ["Stops1", "Stops2","Destinations","All"]
@@ -32,9 +30,8 @@ struct dbStopsMapView: View {
             
             Map(coordinateRegion: $theRegion, showsUserLocation: true, annotationItems: getAnnotations(selectedOption)){ item in
                 MapMarker(coordinate: item.coordinate,tint: item.color)
-            }.onAppear{
-                viewModel.checkIfLocationServiceIsEnabled()
             }
+            
             List {
                 Section(header: Text("\(options[selectedOption])")){
                     ForEach(getAnnotations(selectedOption)) { item in
@@ -50,6 +47,11 @@ struct dbStopsMapView: View {
                 }
             }.pickerStyle(SegmentedPickerStyle())
             
+            Button(action: {
+                fetch.requeueQuery()
+            }){
+                Text("Refresh Data")
+            }
         }
     }
     
